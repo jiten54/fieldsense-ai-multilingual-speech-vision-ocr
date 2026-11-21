@@ -1,0 +1,56 @@
+stages:
+  generate_fixtures:
+    cmd: python3 scripts/generate_field_audio_fixtures.py
+    deps:
+      - scripts/generate_field_audio_fixtures.py
+    outs:
+      - data/fixtures/audio/fixtures_manifest.json
+
+  validate_annotations:
+    cmd: python3 ml/preprocessing/annotation_validator.py --manifest data/annotations/annotations_store.json --base-dir .
+    deps:
+      - ml/preprocessing/annotation_validator.py
+      - data/annotations/annotations_store.json
+
+  field_robustness_suite:
+    cmd: python3 ml/evaluation/field_condition_suite.py
+    deps:
+      - ml/evaluation/field_condition_suite.py
+      - ml/preprocessing/audio_quality.py
+      - ml/vision/image_quality.py
+
+  cpu_benchmarks:
+    cmd: python3 scripts/run_local_benchmarks.py
+    deps:
+      - scripts/run_local_benchmarks.py
+      - ml/evaluation/speech_metrics.py
+      - ml/preprocessing/privacy_redactor.py
+    metrics:
+      - experiments/results/cpu_benchmarks.json:
+          cache: false
+
+  # Full GPU / PyTorch stages (executed when ML dependencies are installed)
+  train_whisper:
+    cmd: python3 ml/speech/whisper/train_whisper.py --config ml/speech/whisper/whisper_config.yaml
+    deps:
+      - ml/speech/whisper/train_whisper.py
+      - ml/speech/whisper/whisper_config.yaml
+    outs:
+      - experiments/results/whisper/final_checkpoint
+
+  train_wav2vec2:
+    cmd: python3 ml/speech/wav2vec2/train_wav2vec2.py --config ml/speech/wav2vec2/wav2vec2_config.yaml
+    deps:
+      - ml/speech/wav2vec2/train_wav2vec2.py
+      - ml/speech/wav2vec2/wav2vec2_config.yaml
+    outs:
+      - experiments/results/wav2vec2/final_checkpoint
+
+  export_quantize_onnx:
+    cmd: python3 ml/optimization/export_onnx.py && python3 ml/optimization/quantize_onnx.py
+    deps:
+      - ml/optimization/export_onnx.py
+      - ml/optimization/quantize_onnx.py
+    outs:
+      - deployment/onnx/vision_cnn_fp32.onnx
+      - deployment/onnx/vision_cnn_int8.onnx

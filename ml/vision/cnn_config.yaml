@@ -1,0 +1,25 @@
+# FieldSense AI — Computer Vision Document & Learning Material Classifier Config
+
+experiment:
+  name: fieldsense_vision_classifier
+  seed: 42
+  output_dir: experiments/results/vision
+  mlflow_tracking_uri: experiments/mlruns
+  tensorboard_dir: experiments/tensorboard/vision
+
+model:
+  backbone: mobilenet_v3_small
+  pretrained: true
+  num_classes: 3
+  class_names:
+    - health_intake_form
+    - early_grade_flashcard
+    - low_quality_unreadable
+  image_size: 224
+
+training:
+  batch_size: 16
+  epochs: 15
+  learning_rate: 3.0e-4
+  weight_decay: 1.0e-4
+  early_stopping_patience: 4

@@ -1,0 +1,69 @@
+{
+  "generated_at": "2026-11-21T02:47:39.851495+00:00",
+  "environment": {
+    "os": "Linux-4.19.0-gvisor-x86_64-with-glibc2.36",
+    "architecture": "x86_64",
+    "cpu_count": 2,
+    "python_version": "3.11.2",
+    "gpu_available": false,
+    "onnxruntime_installed": false
+  },
+  "benchmarks": [
+    {
+      "pipeline": "Audio DSP Quality + FFT Spectral Centroid",
+      "precision": "FP64 (Python stdlib)",
+      "file_size_mb": 0.0977,
+      "device": "CPU (x86_64, 2 vCPU, Python 3.11.2)",
+      "metric_note": "100% deterministic signal check (3.2s 16kHz WAV)",
+      "iterations": 10,
+      "avg_ms": 33.36,
+      "median_ms": 33.65,
+      "p95_ms": 34.35,
+      "min_ms": 31.86,
+      "max_ms": 34.35,
+      "rss_mb": 21.9
+    },
+    {
+      "pipeline": "Image Quality (Laplacian Blur + Luminance)",
+      "precision": "UINT8 / FP64",
+      "file_size_mb": 0.7372,
+      "device": "CPU (x86_64, 2 vCPU, Python 3.11.2)",
+      "metric_note": "896x1200 JPG decoded via ffmpeg + 3x3 Laplacian",
+      "iterations": 5,
+      "avg_ms": 548.1,
+      "median_ms": 538.29,
+      "p95_ms": 596.4,
+      "min_ms": 516.89,
+      "max_ms": 596.4,
+      "rss_mb": 30.82
+    },
+    {
+      "pipeline": "Speech WER/CER Levenshtein Aligner",
+      "precision": "Exact DP",
+      "file_size_mb": 0.01,
+      "device": "CPU (x86_64, 2 vCPU, Python 3.11.2)",
+      "metric_note": "Word + character edit distance + backtrace",
+      "iterations": 50,
+      "avg_ms": 5.13,
+      "median_ms": 5.05,
+      "p95_ms": 5.38,
+      "min_ms": 4.96,
+      "max_ms": 6.7,
+      "rss_mb": 30.82
+    },
+    {
+      "pipeline": "PII Regex Redaction Guard",
+      "precision": "Deterministic",
+      "file_size_mb": 0.01,
+      "device": "CPU (x86_64, 2 vCPU, Python 3.11.2)",
+      "metric_note": "Phone, DOB, Email, ID, Name masking",
+      "iterations": 100,
+      "avg_ms": 0.05,
+      "median_ms": 0.05,
+      "p95_ms": 0.07,
+      "min_ms": 0.05,
+      "max_ms": 0.14,
+      "rss_mb": 30.82
+    }
+  ]
+}

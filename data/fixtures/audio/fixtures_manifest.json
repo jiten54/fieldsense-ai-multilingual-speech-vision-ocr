@@ -1,0 +1,47 @@
+[
+  {
+    "filename": "clean_16khz.wav",
+    "path": "data/fixtures/audio/clean_16khz.wav",
+    "sample_rate_hz": 16000,
+    "duration_sec": 3.2,
+    "description": "Clean synthetic 16kHz baseline utterance",
+    "synthetic": true,
+    "license": "CC0-1.0 (Generated Synthetic Field Fixture)"
+  },
+  {
+    "filename": "noisy_street_16khz.wav",
+    "path": "data/fixtures/audio/noisy_street_16khz.wav",
+    "sample_rate_hz": 16000,
+    "duration_sec": 3.2,
+    "description": "Synthetic speech + street Gaussian noise (~8dB SNR)",
+    "synthetic": true,
+    "license": "CC0-1.0 (Generated Synthetic Field Fixture)"
+  },
+  {
+    "filename": "low_volume_16khz.wav",
+    "path": "data/fixtures/audio/low_volume_16khz.wav",
+    "sample_rate_hz": 16000,
+    "duration_sec": 3.2,
+    "description": "Attenuated distant-microphone synthetic recording",
+    "synthetic": true,
+    "license": "CC0-1.0 (Generated Synthetic Field Fixture)"
+  },
+  {
+    "filename": "clipped_mic_16khz.wav",
+    "path": "data/fixtures/audio/clipped_mic_16khz.wav",
+    "sample_rate_hz": 16000,
+    "duration_sec": 3.2,
+    "description": "Overdriven clipped synthetic microphone capture",
+    "synthetic": true,
+    "license": "CC0-1.0 (Generated Synthetic Field Fixture)"
+  },
+  {
+    "filename": "narrowband_8khz.wav",
+    "path": "data/fixtures/audio/narrowband_8khz.wav",
+    "sample_rate_hz": 8000,
+    "duration_sec": 3.0,
+    "description": "8kHz narrowband rural telephony sample",
+    "synthetic": true,
+    "license": "CC0-1.0 (Generated Synthetic Field Fixture)"
+  }
+]

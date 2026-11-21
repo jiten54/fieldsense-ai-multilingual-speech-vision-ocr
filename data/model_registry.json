@@ -1,0 +1,111 @@
+[
+  {
+    "id": "mdl-audio-qc-dsp",
+    "name": "fieldsense-dsp-audio-qc",
+    "family": "Signal Processing",
+    "version": "1.0.0",
+    "dataset_version": "ds-synthetic-audio-v1",
+    "experiment_id": "local-cpu-bench",
+    "artifact_path": "ml/preprocessing/audio_quality.py",
+    "evaluation_status": "VERIFIED",
+    "metrics": {
+      "avg_latency_ms": 33.36,
+      "p95_latency_ms": 34.35,
+      "rss_mb": 21.9,
+      "field_tests_passed": "3/3"
+    },
+    "hardware": "CPU x86_64 (2 vCPU, 4.0 GiB RAM)",
+    "trained_at": "2026-11-21T02:47:39Z",
+    "approval_status": "APPROVED",
+    "stage": "DEPLOYED",
+    "notes": "Production-ready deterministic audio quality gate (SNR, clipping, RMS, FFT centroid)."
+  },
+  {
+    "id": "mdl-image-qc-laplacian",
+    "name": "fieldsense-laplacian-image-qc",
+    "family": "Computer Vision QC",
+    "version": "1.0.0",
+    "dataset_version": "ds-synthetic-docs-v1",
+    "experiment_id": "local-cpu-bench",
+    "artifact_path": "ml/vision/image_quality.py",
+    "evaluation_status": "VERIFIED",
+    "metrics": {
+      "avg_latency_ms": 548.1,
+      "p95_latency_ms": 596.4,
+      "rss_mb": 30.82,
+      "field_tests_passed": "1/1"
+    },
+    "hardware": "CPU x86_64 (2 vCPU, 4.0 GiB RAM)",
+    "trained_at": "2026-11-21T02:47:39Z",
+    "approval_status": "APPROVED",
+    "stage": "DEPLOYED",
+    "notes": "Deterministic Laplacian blur, under/overexposure, and resolution validator."
+  },
+  {
+    "id": "mdl-tesseract-ocr-cpu",
+    "name": "fieldsense-tesseract-ocr-cpu",
+    "family": "OCR Engine",
+    "version": "1.0.0",
+    "dataset_version": "ds-synthetic-docs-v1",
+    "experiment_id": "local-ocr-verify",
+    "artifact_path": "server.ts (tesseract.js WASM CPU)",
+    "evaluation_status": "VERIFIED",
+    "metrics": {
+      "sample_form_confidence": 85.0,
+      "extracted_chars": 643
+    },
+    "hardware": "CPU x86_64 (Node.js WASM)",
+    "trained_at": "2026-11-21T02:44:10Z",
+    "approval_status": "APPROVED",
+    "stage": "DEPLOYED",
+    "notes": "Local CPU OCR via Tesseract WASM; English printed documents verified."
+  },
+  {
+    "id": "mdl-whisper-tiny-lora",
+    "name": "fieldsense-whisper-tiny-en",
+    "family": "Whisper ASR",
+    "version": "0.1.0-dev",
+    "dataset_version": "ds-google-fleurs (pending)",
+    "experiment_id": "unrun-requires-gpu",
+    "artifact_path": "ml/speech/whisper/train_whisper.py",
+    "evaluation_status": "NOT_EVALUATED",
+    "metrics": null,
+    "hardware": "Requires PyTorch + Transformers (GPU recommended)",
+    "trained_at": null,
+    "approval_status": "PENDING_EVALUATION",
+    "stage": "DEVELOPMENT",
+    "notes": "Training & evaluation scripts implemented. Promotion blocked until real WER/CER evaluation passes threshold."
+  },
+  {
+    "id": "mdl-wav2vec2-ctc",
+    "name": "fieldsense-wav2vec2-ctc-base",
+    "family": "wav2vec2 CTC",
+    "version": "0.1.0-dev",
+    "dataset_version": "ds-openslr-indic (pending)",
+    "experiment_id": "unrun-requires-gpu",
+    "artifact_path": "ml/speech/wav2vec2/train_wav2vec2.py",
+    "evaluation_status": "NOT_EVALUATED",
+    "metrics": null,
+    "hardware": "Requires PyTorch + Transformers (GPU recommended)",
+    "trained_at": null,
+    "approval_status": "PENDING_EVALUATION",
+    "stage": "DEVELOPMENT",
+    "notes": "CTC pipeline and character tokenizer builder ready. Promotion gated on independent test set WER."
+  },
+  {
+    "id": "mdl-mobilenetv3-vision",
+    "name": "fieldsense-mobilenetv3-doc-cls",
+    "family": "CNN Vision",
+    "version": "0.1.0-dev",
+    "dataset_version": "ds-synthetic-docs-v1 (needs expansion)",
+    "experiment_id": "unrun-requires-torch",
+    "artifact_path": "ml/vision/train_cnn.py",
+    "evaluation_status": "NOT_EVALUATED",
+    "metrics": null,
+    "hardware": "Requires PyTorch + torchvision + ONNX Runtime",
+    "trained_at": null,
+    "approval_status": "PENDING_EVALUATION",
+    "stage": "DEVELOPMENT",
+    "notes": "MobileNetV3-Small trainer + ONNX INT8 export ready. Requires labeled training dataset run."
+  }
+]

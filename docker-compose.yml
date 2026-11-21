@@ -1,0 +1,41 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: deployment/docker/Dockerfile.backend
+    ports:
+      - "8000:8000"
+    environment:
+      - FIELDSENSE_ENV=production
+      - FIELDSENSE_DATA_DIR=/app/data
+      - MLFLOW_TRACKING_URI=/app/experiments/mlruns
+    volumes:
+      - ./data:/app/data
+      - ./experiments:/app/experiments
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  frontend:
+    build:
+      context: .
+      dockerfile: deployment/docker/Dockerfile.frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - FIELDSENSE_FASTAPI_URL=http://backend:8000
+    depends_on:
+      - backend
+
+  mlflow:
+    image: python:3.11-slim
+    command: >
+      sh -c "pip install --no-cache-dir mlflow==2.19.0 &&
+      mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri /app/experiments/mlruns"
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./experiments:/app/experiments

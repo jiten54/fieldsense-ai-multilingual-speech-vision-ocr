@@ -1,0 +1,120 @@
+[
+  {
+    "id": "ann-audio-001",
+    "modality": "audio",
+    "dataset_version": "ds-synthetic-audio-v1",
+    "media_path": "data/fixtures/audio/clean_16khz.wav",
+    "language": "en-synthetic",
+    "duration_sec": 3.2,
+    "raw_transcript": "Synthetic clean baseline acoustic fixture at sixteen kilohertz",
+    "corrected_transcript": "Synthetic clean baseline acoustic fixture at sixteen kilohertz",
+    "label": "clean_baseline",
+    "confidence": 1.0,
+    "status": "APPROVED",
+    "flags": [],
+    "review_history": [
+      {
+        "timestamp": "2026-11-21T02:46:00Z",
+        "reviewer": "system-init",
+        "action": "APPROVED",
+        "notes": "Verified 16kHz PCM WAV fixture passes audio quality gate."
+      }
+    ]
+  },
+  {
+    "id": "ann-audio-002",
+    "modality": "audio",
+    "dataset_version": "ds-synthetic-audio-v1",
+    "media_path": "data/fixtures/audio/noisy_street_16khz.wav",
+    "language": "en-synthetic",
+    "duration_sec": 3.2,
+    "raw_transcript": "Synthetic noisy street acoustic test fixture",
+    "corrected_transcript": "Synthetic noisy street acoustic test fixture",
+    "label": "noisy_environment",
+    "confidence": 0.62,
+    "status": "FLAGGED",
+    "flags": ["LOW_SNR_CONDITION", "LOW_CONFIDENCE"],
+    "review_history": [
+      {
+        "timestamp": "2026-11-21T02:46:00Z",
+        "reviewer": "quality-gate",
+        "action": "FLAGGED",
+        "notes": "Elevated background noise detected; retain for robustness evaluation split."
+      }
+    ]
+  },
+  {
+    "id": "ann-audio-003",
+    "modality": "audio",
+    "dataset_version": "ds-synthetic-audio-v1",
+    "media_path": "data/fixtures/audio/clipped_mic_16khz.wav",
+    "language": "en-synthetic",
+    "duration_sec": 3.2,
+    "raw_transcript": "Overdriven clipped microphone sample",
+    "corrected_transcript": "",
+    "label": "clipped_mic",
+    "confidence": 0.41,
+    "status": "PENDING",
+    "flags": ["CLIPPING_DETECTED", "NEEDS_REVIEW"],
+    "review_history": []
+  },
+  {
+    "id": "ann-img-001",
+    "modality": "image",
+    "dataset_version": "ds-synthetic-docs-v1",
+    "media_path": "src/assets/images/sample_health_form_1795229035155.jpg",
+    "language": "en",
+    "duration_sec": null,
+    "raw_transcript": "COMMUNITY HEALTH LOG FACILITY ID CL-98230 DATE 12 OCT 2023 VACCINATION DOSE NUTRITION CHECK",
+    "corrected_transcript": "COMMUNITY HEALTH LOG FACILITY ID CL-98230 DATE 12 OCT 2023 VACCINATION DOSE NUTRITION CHECK",
+    "label": "health_intake_form",
+    "confidence": 0.85,
+    "status": "APPROVED",
+    "flags": ["CONTAINS_SYNTHETIC_PII_MASK_ON_EXPORT"],
+    "review_history": [
+      {
+        "timestamp": "2026-11-21T02:46:00Z",
+        "reviewer": "ocr-qa",
+        "action": "APPROVED",
+        "notes": "Sharp document scan verified (Laplacian variance 7773.16)."
+      }
+    ]
+  },
+  {
+    "id": "ann-img-002",
+    "modality": "image",
+    "dataset_version": "ds-synthetic-docs-v1",
+    "media_path": "src/assets/images/sample_reading_flashcard_1795229035446.jpg",
+    "language": "en",
+    "duration_sec": null,
+    "raw_transcript": "APPLE BALL TREE",
+    "corrected_transcript": "APPLE BALL TREE",
+    "label": "early_grade_flashcard",
+    "confidence": 0.91,
+    "status": "APPROVED",
+    "flags": [],
+    "review_history": []
+  },
+  {
+    "id": "ann-img-003",
+    "modality": "image",
+    "dataset_version": "ds-synthetic-docs-v1",
+    "media_path": "src/assets/images/sample_lowlight_form_1795229036505.jpg",
+    "language": "en",
+    "duration_sec": null,
+    "raw_transcript": "RURAL SUPPLY LEDGER OCT 2023",
+    "corrected_transcript": "",
+    "label": "low_quality_unreadable",
+    "confidence": 0.38,
+    "status": "FLAGGED",
+    "flags": ["LOW_LIGHT", "SKEWED_PERSPECTIVE"],
+    "review_history": [
+      {
+        "timestamp": "2026-11-21T02:46:00Z",
+        "reviewer": "vision-qc",
+        "action": "FLAGGED",
+        "notes": "Mean luminance 43.2/255 with 62.14% underexposed pixels."
+      }
+    ]
+  }
+]

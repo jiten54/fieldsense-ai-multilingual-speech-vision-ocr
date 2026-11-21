@@ -1,0 +1,47 @@
+# FieldSense AI — Whisper Fine-Tuning Configuration
+# Supports both CPU smoke tests (--smoke-test) and GPU fine-tuning runs.
+
+experiment:
+  name: fieldsense_whisper_multilingual
+  seed: 42
+  output_dir: experiments/results/whisper
+  mlflow_tracking_uri: experiments/mlruns
+  tensorboard_dir: experiments/tensorboard/whisper
+
+model:
+  pretrained_checkpoint: openai/whisper-tiny
+  # Recommended GPU checkpoint for Assamese/Bengali/Hindi/English:
+  # openai/whisper-small or openai/whisper-medium
+  language: en
+  task: transcribe
+  forced_decoder_ids: null
+  suppress_tokens: []
+
+data:
+  manifest_path: data/manifests/speech_manifest.jsonl
+  sample_rate: 16000
+  min_duration_sec: 0.5
+  max_duration_sec: 30.0
+  train_split: 0.8
+  val_split: 0.1
+  test_split: 0.1
+
+training:
+  learning_rate: 1.0e-5
+  warmup_steps: 50
+  per_device_train_batch_size: 4
+  per_device_eval_batch_size: 4
+  gradient_accumulation_steps: 4
+  num_train_epochs: 3
+  fp16: true # Automatically disabled when CUDA is unavailable
+  eval_steps: 100
+  save_steps: 100
+  logging_steps: 25
+  resume_from_checkpoint: null
+
+smoke_test:
+  max_train_samples: 8
+  max_eval_samples: 4
+  max_steps: 2
+  per_device_train_batch_size: 2
+  fp16: false

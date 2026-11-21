@@ -1,0 +1,40 @@
+name: FieldSense AI CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  python-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install system audio/ocr tools
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg tesseract-ocr
+      - name: Compile-check all Python modules
+        run: python3 -m compileall -q backend ml scripts
+      - name: Generate fixtures and run unit & field robustness tests
+        run: |
+          python3 scripts/generate_field_audio_fixtures.py
+          python3 -m unittest discover -s backend/tests -v
+
+  frontend-and-api-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install npm dependencies
+        run: npm ci
+      - name: TypeScript check
+        run: npm run lint
+      - name: Run Vitest tests
+        run: npm test
+      - name: Production Vite build
+        run: npm run build
